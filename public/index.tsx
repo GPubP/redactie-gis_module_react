@@ -1,0 +1,1 @@
+const startModule = 'start';
