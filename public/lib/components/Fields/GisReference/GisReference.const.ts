@@ -15,7 +15,7 @@ export const LAYER_DEFAULT_OPTIONS: SelectOption[] = [
 	},
 	{
 		label: 'Selecteer een lege laag',
-		value: '',
+		value: 'empty',
 	},
 ];
 

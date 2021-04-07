@@ -64,7 +64,7 @@ const GisReference: FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, field
 	const updateValue = (newPartailValue: Partial<{ layerId: string; gisId: string }>): void => {
 		fieldHelperProps.setValue({
 			...(value || {}),
-			...(newPartailValue?.layerId === '' ? { gisId: '' } : {}),
+			...(newPartailValue?.layerId === 'empty' ? { gisId: '', layerId: '' } : {}),
 			...newPartailValue,
 		});
 	};
