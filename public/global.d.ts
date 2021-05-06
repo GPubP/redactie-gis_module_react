@@ -1,3 +1,4 @@
+declare module '@acpaas-ui/embeddable-widgets';
 declare module '@acpaas-ui/react-components';
 declare module '@acpaas-ui/react-editorial-components';
 

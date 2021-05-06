@@ -83,6 +83,7 @@
     "prettier": "1.19.1",
     "ramda": "0.27.1",
     "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-router-dom": "5.1.2",
     "rxjs": "6.6.3",
     "stylelint": "13.0.0",
@@ -95,5 +96,7 @@
     "webpack-cli": "3.3.10",
     "yup": "0.28.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@acpaas-ui/embeddable-widgets": "2.0.7"
+  }
 }
