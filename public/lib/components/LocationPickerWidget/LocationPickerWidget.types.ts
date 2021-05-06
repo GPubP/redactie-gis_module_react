@@ -1,11 +1,11 @@
 export interface LocationPickerWidgetProps {
 	branding?: 'antwerp' | 'acpaas' | 'digipolis';
 	initialLocation?: LocationPickerInitialLocation;
-	featureLayers?: LocationPickerFeatureLayer[];
+	featureLayers?: FeatureLayerModel[];
 	locateUserOnInit?: boolean;
-	locationLayers?: [];
+	locationLayers?: string[];
 	prioritizeLayers?: string[];
-	onLocationSelect?: (location: LocationPickerLocation) => void;
+	onLocationSelect?: (location: AddressModel | CoordinateModel | LocationModel) => void;
 }
 
 // Types found here:
@@ -22,7 +22,7 @@ export interface LocationPickerInitialLocation {
 	};
 }
 
-export interface LocationPickerFeatureLayer {
+export interface FeatureLayerModel {
 	/* url to the mapServer containing the required features */
 	url: string;
 	/* icon to visualize the features. */
@@ -40,6 +40,86 @@ export interface LocationPickerFeatureLayer {
 		};
 	};
 }
-export interface LocationPickerLocation {
-	loaction: any;
+
+export interface AddressModel {
+	id?: number;
+	addressRegId?: number;
+	crabAddressId?: number;
+	crabAddressType?: CrabAddressType;
+	formattedAddress?: string;
+	label?: string;
+	municipalityPost?: {
+		nisCode?: string;
+		municipality?: string;
+		antwerpDistrict?: string;
+		antwerpDistrictCode?: string;
+		postCode?: number;
+	};
+	street?: {
+		streetNameId?: number;
+		streetName?: string;
+		homonymAddition?: string;
+	};
+	houseNumber?: {
+		houseNumber?: string;
+		busNumber?: string;
+	};
+	addressPosition?: {
+		lambert72?: LambertModel;
+		wgs84?: LatLngModel;
+		geometryMethod?: string;
+	};
+	distance?: number;
+}
+
+enum CrabAddressType {
+	SUB = 'subadres',
+	MAIN = 'hoofdadres',
+}
+
+export interface LatLngModel {
+	lat?: number;
+	lng?: number;
+}
+
+export interface CoordinateModel {
+	label?: string;
+	/**
+	 * Found location (park, poi, ...)
+	 */
+	location?: LocationModel;
+	/**
+	 * Found address
+	 */
+	address?: AddressModel;
+	/**
+	 * The coordinates used for determining a location or address by reverse lookup.
+	 */
+	actualLocation?: LatLngModel;
+}
+
+export interface LocationModel {
+	id?: string;
+	name?: string;
+	layer?: string;
+	streetNameId?: number;
+	streetName?: string;
+	postCodes?: Array<number>;
+	postCode?: number;
+	antwerpDistrict?: string;
+	municipality?: string;
+	label?: string;
+	position?: {
+		lambert72?: LambertModel;
+		wgs84?: LatLngModel;
+		geometryMethod?: string;
+		geometrySpecification?: string;
+		geometryShape?: string;
+		geometry?: any;
+	};
+}
+
+export interface LambertModel {
+	x?: number;
+	y?: number;
 }

@@ -2,7 +2,10 @@ import { reactComponent } from '@acpaas-ui/embeddable-widgets';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { LOCATION_PICKER_DEFINITION_URL } from './LocationPickerWidget.const';
+import {
+	LOCATION_PICKER_DEFINITION_URL,
+	LOCATION_PICKER_OVERRIDES,
+} from './LocationPickerWidget.const';
 import { LocationPickerWidgetProps } from './LocationPickerWidget.types';
 
 const LocationPickerWidget: React.ComponentClass<LocationPickerWidgetProps> = reactComponent(
@@ -10,7 +13,8 @@ const LocationPickerWidget: React.ComponentClass<LocationPickerWidgetProps> = re
 	{
 		React,
 		ReactDOM,
-	}
+	},
+	LOCATION_PICKER_OVERRIDES
 );
 
 export default LocationPickerWidget;
