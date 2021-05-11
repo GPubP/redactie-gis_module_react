@@ -1,6 +1,6 @@
 export interface LocationPickerWidgetProps {
 	branding?: 'antwerp' | 'acpaas' | 'digipolis';
-	initialLocation?: LocationPickerInitialLocation;
+	initialLocation?: InitialLocationModel;
 	featureLayers?: FeatureLayerModel[];
 	locateUserOnInit?: boolean;
 	locationLayers?: string[];
@@ -11,7 +11,7 @@ export interface LocationPickerWidgetProps {
 // Types found here:
 // https://github.com/digipolisantwerp/location-picker_widget_angular/tree/master/projects/ngx-location-picker/src/lib/types
 
-export interface LocationPickerInitialLocation {
+export interface InitialLocationModel {
 	label?: string;
 	position?: {
 		lat: number;
@@ -84,6 +84,7 @@ export interface LatLngModel {
 
 export interface CoordinateModel {
 	label?: string;
+	name?: string;
 	/**
 	 * Found location (park, poi, ...)
 	 */

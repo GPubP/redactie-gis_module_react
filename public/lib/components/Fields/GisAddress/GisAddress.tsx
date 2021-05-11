@@ -2,7 +2,14 @@ import { InputFieldProps } from '@redactie/form-renderer-module';
 import React from 'react';
 
 import { formRendererConnector } from '../../../connectors';
-import { LocationPickerWidget } from '../../LocationPickerWidget';
+import {
+	AddressModel,
+	CoordinateModel,
+	InitialLocationModel,
+	LatLngModel,
+	LocationModel,
+	LocationPickerWidget,
+} from '../../LocationPickerWidget';
 
 import { GisAddressValue } from './GisAddress.types';
 
@@ -17,6 +24,28 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 		setValue(location);
 	};
 
+	const getInitialLocation = (): InitialLocationModel | undefined => {
+		const fieldValue = field.value as GisAddressValue | undefined;
+
+		if (!fieldValue) {
+			return fieldValue;
+		}
+
+		const { addressPosition } = fieldValue as AddressModel;
+		const { actualLocation } = fieldValue as CoordinateModel;
+		const { position } = fieldValue as LocationModel;
+
+		return {
+			label: fieldValue.label,
+			position: (addressPosition?.wgs84 || actualLocation || position?.wgs84) as Required<
+				LatLngModel
+			>,
+			options: {
+				triggerSearch: true,
+			},
+		};
+	};
+
 	return (
 		<>
 			{trimmedLabel && (
@@ -28,7 +57,10 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 				</formRendererConnector.api.FormRendererFieldTitle>
 			)}
 			{config.description && <p className="u-margin-bottom">{config.description}</p>}
-			<LocationPickerWidget onLocationSelect={onLocationSelect} />
+			<LocationPickerWidget
+				initialLocation={getInitialLocation()}
+				onLocationSelect={onLocationSelect}
+			/>
 			<formRendererConnector.api.ErrorMessage name={field.name} />
 		</>
 	);
