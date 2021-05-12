@@ -1,6 +1,6 @@
 {
   "name": "@redactie/gis-module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "redactie gis module",
   "main": "dist/redactie-gis-module.umd.js",
   "module": "dist/redactie-gis-module.umd.js",
