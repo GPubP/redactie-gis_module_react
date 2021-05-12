@@ -28,7 +28,8 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 		const fieldValue = field.value as GisAddressValue | undefined;
 
 		if (!fieldValue) {
-			return fieldValue;
+			// The initialLocation prop expects an object
+			return {};
 		}
 
 		const { addressPosition } = fieldValue as AddressModel;
