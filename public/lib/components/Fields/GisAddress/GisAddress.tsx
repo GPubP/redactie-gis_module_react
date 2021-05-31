@@ -42,7 +42,7 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 				LatLngModel
 			>,
 			options: {
-				triggerSearch: true,
+				triggerSearch: false,
 			},
 		};
 	};
