@@ -61,6 +61,7 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 			<LocationPickerWidget
 				initialLocation={getInitialLocation()}
 				onLocationSelect={onLocationSelect}
+				locationLayers={config.allowedLayers || ['straatnaam']}
 			/>
 			<formRendererConnector.api.ErrorMessage name={field.name} />
 		</>
