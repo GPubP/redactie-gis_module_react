@@ -20,12 +20,13 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 
 	const [searchStreet, layers] = useMemo(() => {
 		let street = false;
+
 		const filteredLayers = config.allowedLayers.reduce((acc: string[], layer: string) => {
-			if (
-				layer === 'straat' &&
-				!config.allowedLayers.find((l: string) => l === 'straatnaam')
-			) {
+			if (layer === 'straatnaam' && !config.allowedLayers.find((l: string) => l === 'none')) {
 				street = true;
+			}
+
+			if (layer === 'none') {
 				return acc;
 			}
 
