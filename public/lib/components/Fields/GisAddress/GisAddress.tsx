@@ -1,5 +1,5 @@
 import { InputFieldProps } from '@redactie/form-renderer-module';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { formRendererConnector } from '../../../connectors';
 import {
@@ -18,9 +18,31 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 	const { field } = fieldProps;
 	const { config = {}, label = '' } = fieldSchema;
 
+	const [searchStreet, layers] = useMemo(() => {
+		let street = false;
+
+		const filteredLayers = config.allowedLayers.reduce((acc: string[], layer: string) => {
+			if (layer === 'straatnaam' && !config.allowedLayers.find((l: string) => l === 'none')) {
+				street = true;
+			}
+
+			if (layer === 'none') {
+				return acc;
+			}
+
+			return [...acc, layer];
+		}, []);
+
+		return [street, filteredLayers];
+	}, [config.allowedLayers]);
+
 	const trimmedLabel = label.trim();
 
 	const onLocationSelect = (location: GisAddressValue): void => {
+		if (!location.id) {
+			return;
+		}
+
 		setValue(location);
 	};
 
@@ -61,7 +83,8 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 			<LocationPickerWidget
 				initialLocation={getInitialLocation()}
 				onLocationSelect={onLocationSelect}
-				locationLayers={config.allowedLayers || []}
+				locationLayers={layers}
+				searchStreetNameForAddress={searchStreet}
 			/>
 			<formRendererConnector.api.ErrorMessage name={field.name} />
 		</>

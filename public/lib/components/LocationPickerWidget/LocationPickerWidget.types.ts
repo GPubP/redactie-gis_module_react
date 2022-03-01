@@ -5,6 +5,7 @@ export interface LocationPickerWidgetProps {
 	locateUserOnInit?: boolean;
 	locationLayers?: string[];
 	prioritizeLayers?: string[];
+	searchStreetNameForAddress?: boolean;
 	onLocationSelect?: (location: AddressModel | CoordinateModel | LocationModel) => void;
 }
 
@@ -83,6 +84,7 @@ export interface LatLngModel {
 }
 
 export interface CoordinateModel {
+	id?: string;
 	label?: string;
 	name?: string;
 	/**
