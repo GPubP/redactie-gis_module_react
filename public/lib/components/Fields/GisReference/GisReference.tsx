@@ -24,7 +24,7 @@ const GisReference: FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, field
 	 * Hooks
 	 */
 	const [isLoadingLayers, layers] = useLayers();
-	const [isLoadingFeatures, features] = useFeatures(value?.layerId);
+	const [isLoadingFeatures, features, layerFields] = useFeatures(value?.layerId);
 	const showFeatureSelect = useMemo<boolean>(
 		() => !isNil(value?.layerId) && value?.layerId !== '',
 		[value]
@@ -42,13 +42,16 @@ const GisReference: FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, field
 	const featureOptions = useMemo<SelectOption[]>(() => {
 		const defaultOptions = [FEATURE_DEFAULT_OPTION];
 
+		const gisIdField = layerFields.find(field => field.alias === 'GISID');
+		const gisIdProp = gisIdField?.name || 'GISID';
+
 		const options = (features ?? []).map(feature => ({
-			label: feature.properties.naam ?? feature.properties.NAAM,
-			value: feature.properties.GISID ?? feature.properties.ID,
+			label: feature.attributes.naam ?? feature.attributes.NAAM,
+			value: feature.attributes[gisIdProp as 'GISID' | 'ID' | 'PLANONID'],
 		}));
 
 		return defaultOptions.concat(options);
-	}, [features]);
+	}, [features, layerFields]);
 
 	useDidMount(() => {
 		if (!value) {

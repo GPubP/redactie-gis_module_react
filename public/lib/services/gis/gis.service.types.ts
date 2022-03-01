@@ -25,12 +25,13 @@ export interface FeatureResponse {
 	type: string;
 	id: number;
 	geometry: {
-		type: string;
-		coordinates: number[];
+		x: number;
+		y: number;
 	};
-	properties: {
+	attributes: {
 		OBJECTID: number;
 		GISID: string;
+		PLANONID: string;
 		ID: string;
 		naam: string;
 		NAAM: string;
@@ -44,6 +45,20 @@ export interface FeatureResponse {
 	};
 }
 
+export interface LayerFieldResponse {
+	name: string;
+	type: string;
+	alias: string;
+	sqlType: string;
+	domain: string;
+	defaultValue: string;
+}
+
+export interface LayerField extends LayerFieldResponse {
+	layerId: string;
+}
+
 export interface FeaturesResponse {
 	features: FeatureResponse[];
+	fields: LayerFieldResponse[];
 }
