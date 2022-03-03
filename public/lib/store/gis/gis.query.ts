@@ -1,7 +1,7 @@
 import { Query } from '@datorama/akita';
 import { Observable } from 'rxjs';
 
-import { Feature } from '../../services/gis';
+import { Feature, LayerField } from '../../services/gis';
 
 import { GisState } from './gis.model';
 import { GisStore, gisStore } from './gis.store';
@@ -30,6 +30,10 @@ export class GisQuery extends Query<GisState> {
 
 	public selectFeaturesByLayerId(layerId: string): Observable<Feature[]> {
 		return this.select(state => state.features.filter(feature => feature.layerId === layerId));
+	}
+
+	public selectLayerFields(layerId: string): Observable<LayerField[]> {
+		return this.select(state => state.layerFields.filter(field => field.layerId === layerId));
 	}
 }
 

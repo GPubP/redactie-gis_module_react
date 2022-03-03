@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Feature, GisApiService, gisApiService } from '../../services/gis';
+import { Feature, GisApiService, gisApiService, LayerField } from '../../services/gis';
 
 import { gisQuery, GisQuery } from './gis.query';
 import { gisStore, GisStore } from './gis.store';
@@ -59,6 +59,13 @@ export class GisFacade {
 							})),
 						],
 						featureLayerIds: [...state.featureLayerIds, layerId],
+						layerFields: [
+							...state.layerFields,
+							...(response.fields || []).map(field => ({
+								...field,
+								layerId,
+							})),
+						],
 					}));
 				}
 			})
@@ -68,6 +75,10 @@ export class GisFacade {
 
 	public selectFeaturesByLayerId(layerId: string): Observable<Feature[]> {
 		return this.query.selectFeaturesByLayerId(layerId);
+	}
+
+	public selectLayerFields(layerId: string): Observable<LayerField[]> {
+		return this.query.selectLayerFields(layerId);
 	}
 
 	public hasFeaturesFromLayer(layerId: string): boolean {
