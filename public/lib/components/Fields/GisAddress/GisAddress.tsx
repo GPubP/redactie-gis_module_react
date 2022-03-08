@@ -44,8 +44,8 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 
 	const trimmedLabel = label.trim();
 
-	const onLocationSelect = (location: GisAddressValue): void => {
-		if (!location.id) {
+	const onLocationSelect = (location: GisAddressValue & { isInitialLocation?: true }): void => {
+		if (location.isInitialLocation) {
 			return;
 		}
 
@@ -72,6 +72,7 @@ const GisAddress: React.FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, f
 			options: {
 				triggerSearch: false,
 			},
+			isInitialLocation: true,
 		};
 	};
 
