@@ -21,6 +21,7 @@ export interface InitialLocationModel {
 	options?: {
 		triggerSearch?: boolean;
 	};
+	isInitialLocation?: true;
 }
 
 export interface FeatureLayerModel {
