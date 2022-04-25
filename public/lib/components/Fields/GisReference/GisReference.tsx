@@ -39,14 +39,17 @@ const GisReference: FC<InputFieldProps> = ({ fieldHelperProps, fieldProps, field
 
 		return defaultOptions.concat(options);
 	}, [layers]);
+
 	const featureOptions = useMemo<SelectOption[]>(() => {
 		const defaultOptions = [FEATURE_DEFAULT_OPTION];
 
 		const gisIdField = layerFields.find(field => field.alias === 'GISID');
+		const gisNameField = layerFields.find(field => field.alias === 'NAAM');
 		const gisIdProp = gisIdField?.name || 'GISID';
+		const gisNameProp = gisNameField?.name || 'NAAM';
 
 		const options = (features ?? []).map(feature => ({
-			label: feature.attributes.naam ?? feature.attributes.NAAM,
+			label: feature.attributes[gisNameProp as 'naam' | 'NAAM'],
 			value: feature.attributes[gisIdProp as 'GISID' | 'ID' | 'PLANONID'],
 		}));
 
