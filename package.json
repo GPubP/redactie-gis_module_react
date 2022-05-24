@@ -100,10 +100,10 @@
     "typescript-plugin-css-modules": "2.1.2",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
-    "yup": "0.28.5"
+    "yup": "0.28.5",
+    "typedoc-plugin-missing-exports": "0.22.6"
   },
   "dependencies": {
-    "@acpaas-ui/embeddable-widgets": "2.0.7",
-    "typedoc-plugin-missing-exports": "0.22.6"
+    "@acpaas-ui/embeddable-widgets": "2.0.7"
   }
 }
